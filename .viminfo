@@ -1,0 +1,297 @@
+# 이 viminfo 파일은 빔이 만든 것입니다 Vim 8.0.
+# 조심만 한다면 고칠 수도 있습니다!
+
+# Viminfo version
+|1,4
+
+# 이 파일이 저장되었을 때의 'encoding'의 값
+*encoding=utf-8
+
+
+# hlsearch on (H) or off (h):
+~H
+# 명령 행 히스토리 (새것부터 오래된 것 순):
+:wq
+|2,0,1776160466,,"wq"
+:q!
+|2,0,1775812620,,"q!"
+
+# 찾을 문자열 히스토리 (새것부터 오래된 것 순):
+
+# 표현 히스토리 (새것부터 오래된 것 순):
+
+# 입력 행 히스토리 (새것부터 오래된 것 순):
+
+# 디버그 행 히스토리 (새것부터 오래된 것 순):
+
+# 레지스터:
+""1	LINE	0
+	# 5. 배포시작 (Action -> EKS)
+|3,1,1,1,1,0,1776158041,"# 5. 배포시작 (Action -> EKS)"
+"2	LINE	0
+	echo "Step 5: EKS 서버에 최신 버전을 적용한다."
+|3,0,2,1,1,0,1776158040,"echo \"Step 5: EKS 서버에 최신 버전을 적용한다.\""
+"3	LINE	0
+	kubectl apply -f deployment.yaml
+|3,0,3,1,1,0,1776158040,"kubectl apply -f deployment.yaml"
+"4	LINE	0
+	# 3. 보안을 스캔함 (Docker -> Trivy)
+|3,0,4,1,1,0,1776157938,"# 3. 보안을 스캔함 (Docker -> Trivy)"
+"5	LINE	0
+	echo "Step 3: Trivy로 이미지의 보안을 점검한다."
+|3,0,5,1,1,0,1776157937,"echo \"Step 3: Trivy로 이미지의 보안을 점검한다.\""
+"6	LINE	0
+	trivy image --severity HIGH my-app:latest
+|3,0,6,1,1,0,1776157936,"trivy image --severity HIGH my-app:latest"
+
+# 파일 마크:
+'0  1  2  ~/Dockerfile
+|4,48,1,2,1776160467,"~/Dockerfile"
+'1  23  0  ~/deploy.sh
+|4,49,23,0,1776158810,"~/deploy.sh"
+'2  1  2  ~/Dockerfile
+|4,50,1,2,1776158179,"~/Dockerfile"
+'3  23  0  ~/deploy.sh
+|4,51,23,0,1776158099,"~/deploy.sh"
+'4  23  0  ~/deploy.sh
+|4,52,23,0,1776158052,"~/deploy.sh"
+'5  23  0  ~/deploy.sh
+|4,53,23,0,1776158052,"~/deploy.sh"
+'6  2  39  ~/Dockerfile
+|4,54,2,39,1776157884,"~/Dockerfile"
+'7  2  39  ~/Dockerfile
+|4,55,2,39,1776157884,"~/Dockerfile"
+'8  2  39  ~/Dockerfile
+|4,56,2,39,1776157884,"~/Dockerfile"
+'9  2  39  ~/Dockerfile
+|4,57,2,39,1776157884,"~/Dockerfile"
+
+# 점프목록 (새것이 먼저):
+-'  1  2  ~/Dockerfile
+|4,39,1,2,1776160467,"~/Dockerfile"
+-'  23  0  ~/deploy.sh
+|4,39,23,0,1776158810,"~/deploy.sh"
+-'  23  0  ~/deploy.sh
+|4,39,23,0,1776158810,"~/deploy.sh"
+-'  1  2  ~/Dockerfile
+|4,39,1,2,1776158179,"~/Dockerfile"
+-'  1  2  ~/Dockerfile
+|4,39,1,2,1776158179,"~/Dockerfile"
+-'  2  39  ~/Dockerfile
+|4,39,2,39,1776158171,"~/Dockerfile"
+-'  2  39  ~/Dockerfile
+|4,39,2,39,1776158171,"~/Dockerfile"
+-'  2  39  ~/Dockerfile
+|4,39,2,39,1776158171,"~/Dockerfile"
+-'  23  0  ~/deploy.sh
+|4,39,23,0,1776158099,"~/deploy.sh"
+-'  23  0  ~/deploy.sh
+|4,39,23,0,1776158099,"~/deploy.sh"
+-'  23  0  ~/deploy.sh
+|4,39,23,0,1776158099,"~/deploy.sh"
+-'  23  0  ~/deploy.sh
+|4,39,23,0,1776158099,"~/deploy.sh"
+-'  23  0  ~/deploy.sh
+|4,39,23,0,1776158052,"~/deploy.sh"
+-'  23  0  ~/deploy.sh
+|4,39,23,0,1776158052,"~/deploy.sh"
+-'  23  0  ~/deploy.sh
+|4,39,23,0,1776158052,"~/deploy.sh"
+-'  23  0  ~/deploy.sh
+|4,39,23,0,1776158052,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157911,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157911,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157911,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157911,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157911,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157911,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157911,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157911,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157911,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157911,"~/deploy.sh"
+-'  2  39  ~/Dockerfile
+|4,39,2,39,1776157884,"~/Dockerfile"
+-'  2  39  ~/Dockerfile
+|4,39,2,39,1776157884,"~/Dockerfile"
+-'  2  39  ~/Dockerfile
+|4,39,2,39,1776157884,"~/Dockerfile"
+-'  2  39  ~/Dockerfile
+|4,39,2,39,1776157884,"~/Dockerfile"
+-'  2  39  ~/Dockerfile
+|4,39,2,39,1776157884,"~/Dockerfile"
+-'  2  39  ~/Dockerfile
+|4,39,2,39,1776157884,"~/Dockerfile"
+-'  2  39  ~/Dockerfile
+|4,39,2,39,1776157884,"~/Dockerfile"
+-'  2  39  ~/Dockerfile
+|4,39,2,39,1776157884,"~/Dockerfile"
+-'  3  0  ~/Dockerfile
+|4,39,3,0,1776157874,"~/Dockerfile"
+-'  3  0  ~/Dockerfile
+|4,39,3,0,1776157874,"~/Dockerfile"
+-'  3  0  ~/Dockerfile
+|4,39,3,0,1776157874,"~/Dockerfile"
+-'  3  0  ~/Dockerfile
+|4,39,3,0,1776157874,"~/Dockerfile"
+-'  3  0  ~/Dockerfile
+|4,39,3,0,1776157874,"~/Dockerfile"
+-'  3  0  ~/Dockerfile
+|4,39,3,0,1776157874,"~/Dockerfile"
+-'  3  0  ~/Dockerfile
+|4,39,3,0,1776157874,"~/Dockerfile"
+-'  3  0  ~/Dockerfile
+|4,39,3,0,1776157874,"~/Dockerfile"
+-'  3  0  ~/Dockerfile
+|4,39,3,0,1776157874,"~/Dockerfile"
+-'  3  0  ~/Dockerfile
+|4,39,3,0,1776157874,"~/Dockerfile"
+-'  3  0  ~/Dockerfile
+|4,39,3,0,1776157874,"~/Dockerfile"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157789,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157789,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157789,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157789,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157789,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157789,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157789,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776157789,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776100965,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776100965,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776100965,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776100965,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776100965,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776100965,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776100965,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776100965,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776100379,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776100379,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776100379,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776100379,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776100379,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776100379,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776100379,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776100379,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776099936,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776099936,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776099936,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776099936,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776099936,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776099936,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776099936,"~/deploy.sh"
+-'  24  32  ~/deploy.sh
+|4,39,24,32,1776099936,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+-'  1  24  ~/deploy.sh
+|4,39,1,24,1776098896,"~/deploy.sh"
+
+# 파일내의 마크 히스토리 (새것부터 오래된 순):
+
+> ~/Dockerfile
+	*	1776160465	0
+	"	1	2
+	^	1	3
+	.	1	2
+	+	2	39
+	+	1	2
+
+> ~/deploy.sh
+	*	1776158809	0
+	"	23	0
+	^	23	0
+	.	22	44
+	+	1	11
+	+	1	23
+	+	1	11
+	+	24	32
+	+	12	60
+	+	14	71
+	+	20	62
+	+	22	44
+
+> /etc/sshd/sshd_config
+	*	1775812596	0
+	"	1	0
