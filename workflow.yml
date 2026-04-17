@@ -1,0 +1,53 @@
+name: Deploy to EKS
+
+on:
+  push:
+    branches: [ "main" ] # 메인 브랜치에 푸시될 때 실행
+
+env:
+  AWS_REGION: ap-northeast-2
+  ECR_REPOSITORY: my-fastapi-repo
+  EKS_CLUSTER_NAME: my-eks-cluster
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # 1. AWS 자격 증명 설정 (GitHub Secrets에 미리 등록해야 함)
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    # 2. ECR 로그인
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    # 3. Docker 이미지 빌드 및 ECR 푸시
+    - name: Build, tag, and push image to Amazon ECR
+      id: build-image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+    # 4. EKS 클러스터 접속 설정 (kubeconfig 업데이트)
+    - name: Update kubeconfig
+      run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
+
+    # 5. 쿠버네티스 배포 (이미지 태그 업데이트 포함)
+    - name: Deploy to EKS
+      run: |
+        # kustomize나 sed를 사용해 deployment.yaml의 이미지를 방금 빌드한 태그로 교체
+        sed -i 's|CONTAINER_IMAGE|${{ steps.build-image.outputs.image }}|g' k8s/deployment.yaml
+        kubectl apply -f k8s/deployment.yaml
+        kubectl apply -f k8s/service.yaml
