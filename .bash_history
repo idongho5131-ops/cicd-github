@@ -74,3 +74,47 @@ cat .git/config
 kubectl apply -f deployment.yaml
 poweroff
 sudo su
+git add .
+git commit -m "파이프라인 완성"
+git push origin main
+git pull origin main
+git push origin main
+git pull origin main --allow-unrelated-histories
+git push origin main
+git push origin main --force
+git add .
+kubectl get pods -n default
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+kubectl version --client
+aws eks update-kubeconfig --region ap-northeast-2 --name my-eks-cluster
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+sudo ./aws/install
+sudo yum install -y unzip
+sudo ./aws/install
+unzip awscliv2.zip
+sudo ./aws/install
+aws configure
+kubectl get pods -n default
+aws sts get-caller-identity
+history
+aws configure
+kubectl get pods -n default
+aws eks update-kubeconfig --region ap-northeast-2 --name my-eks-cluster
+aws eks list-clusters --region ap-northeast-2
+aws eks update-kubeconfig --region ap-northeast-2 --name my-eks-cluster
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+eksctl create cluster --name my-eks-cluster --region ap-northeast-2 --nodegroup-name standard-nodes --node-type t3.medium --nodes 2 --managed
+history
+aws eks update-kubeconfig --region ap-northeast-2 --name my-eks-cluster
+kubectl get nodes
+kubectl get pods -A
+kubectl get pods -w
+kubectl get svc
+kubectl get ns
+kubectl apply -f k8s/
+kubectl apply -f deployment.yaml
+poweroff
