@@ -7,7 +7,7 @@ on:
 env:
   AWS_REGION: ap-northeast-2
   ECR_REPOSITORY: my-fastapi-repo
-  EKS_CLUSTER: my-eks-cluster  # 👈 아까 확인한 '진짜' 이름으로 바꿔줘!
+  EKS_CLUSTER: my-eks-cluster  # 👈 여기만 '진짜' 이름인지 다시 확인!
 
 jobs:
   deploy:
@@ -19,8 +19,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.MY_ACCESS_KEY }}      # 새 이름으로 변경!
+          aws-secret-access-key: ${{ secrets.MY_SECRET_KEY }}  # 새 이름으로 변경!
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
@@ -43,6 +43,9 @@ jobs:
 
       - name: Deploy to EKS
         run: |
+          # k8s 폴더 안의 deployment.yaml 파일에 새 이미지 주소 주입
+          sed -i "s|CONTAINER_IMAGE|${{ steps.build-image.outputs.image }}|g" k8s/deployment.yaml
+          kubectl apply -f k8s/
           # k8s 폴더 안의 deployment.yaml 파일에 새 이미지 주소 주입
           sed -i "s|CONTAINER_IMAGE|${{ steps.build-image.outputs.image }}|g" k8s/deployment.yaml
           kubectl apply -f k8s/
