@@ -43,7 +43,8 @@ jobs:
 
       - name: Deploy to EKS
         run: |
-          # k8s 폴더 안의 deployment.yaml 파일에 새 이미지 주소 주입
-          sed -i "s|CONTAINER_IMAGE|${{ steps.build-image.outputs.image }}|g" k8s/deployment.yaml
-          # k8s 폴더 내의 모든 매니페스트 적용 (deployment, service 등)
-          kubectl apply -f k8s/
+          # 1. k8s/ 제거 (현재 폴더에 있는 deployment.yaml을 직접 수정)
+          sed -i "s|CONTAINER_IMAGE|${{ steps.build-image.outputs.image }}|g" deployment.yaml
+          
+          # 2. k8s/ 제거 (현재 폴더의 매니페스트 적용)
+          kubectl apply -f deployment.yaml
