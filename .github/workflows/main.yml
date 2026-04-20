@@ -46,3 +46,21 @@ jobs:
           # 파일이 최상위에 있으므로 k8s/ 경로를 모두 제거함
           sed -i "s|CONTAINER_IMAGE|${{ steps.build-image.outputs.image }}|g" deployment.yaml
           kubectl apply -f deployment.yaml
+
+      - name: Deploy to EKS
+        run: |
+          # 현재 어떤 파일들이 있는지 로그에 출력 (에러 찾기용)
+          echo "Checking files in current directory:"
+          ls -R
+
+          # 만약 파일명이 deployment.yml (a가 빠진 것)이라면 아래 파일명도 수정해야 해!
+          if [ -f "deployment.yaml" ]; then
+            sed -i "s|CONTAINER_IMAGE|${{ steps.build-image.outputs.image }}|g" deployment.yaml
+            kubectl apply -f deployment.yaml
+          elif [ -f "deployment.yml" ]; then
+            sed -i "s|CONTAINER_IMAGE|${{ steps.build-image.outputs.image }}|g" deployment.yml
+            kubectl apply -f deployment.yml
+          else
+            echo "❌ Error: deployment.yaml or deployment.yml not found!"
+            exit 1
+          fi
