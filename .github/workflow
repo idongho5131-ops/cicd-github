@@ -1,0 +1,40 @@
+name: Deploy FastAPI to EC2
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 1. 도커 이미지 빌드 및 Docker Hub 푸시 (필요한 경우)
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fastapi-app:latest
+
+      # 2. SSH로 EC2에 접속해서 배포 (클러스터 명령어 대신 이거!)
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            # 기존 컨테이너 중지 및 삭제
+            docker stop fastapi-app || true
+            docker rm fastapi-app || true
+            # 새 이미지 가져오기 및 실행
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/fastapi-app:latest
+            docker run -d --name fastapi-app -p 80:8000 ${{ secrets.DOCKERHUB_USERNAME }}/fastapi-app:latest
