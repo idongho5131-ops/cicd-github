@@ -1,59 +1,43 @@
-name: Deploy to EKS
+name: Deploy FastAPI to EC2
 
 on:
   push:
     branches: [ "main" ]
-
-env:
-  AWS_REGION: ap-northeast-2
-  ECR_REPOSITORY: my-fastapi-repo    # 👈 AWS ECR에 만든 이름과 똑같아야 함!
-  EKS_CLUSTER: my-eks-cluster       # 👈 AWS EKS 클러스터 '진짜' 이름!
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      # 1. 도커 이미지 빌드 및 Docker Hub 푸시 (필요한 경우)
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fastapi-app:latest
 
-      - name: Build and Push image to ECR
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: ${{ github.sha }}
-        run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
-
-      - name: Update kubeconfig
-        run: |
-          aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER }}
-
-
-      - name: Deploy to EKS
-        run: |
-          # 현재 어떤 파일들이 있는지 로그에 출력 (에러 찾기용)
-          echo "Checking files in current directory:"
-          ls -R
-
-          # 만약 파일명이 deployment.yml (a가 빠진 것)이라면 아래 파일명도 수정해야 해!
-          if [ -f "deployment.yaml" ]; then
-            sed -i "s|CONTAINER_IMAGE|${{ steps.build-image.outputs.image }}|g" deployment.yaml
-            kubectl apply -f deployment.yaml
-          elif [ -f "deployment.yml" ]; then
-            sed -i "s|CONTAINER_IMAGE|${{ steps.build-image.outputs.image }}|g" deployment.yml
+      # 2. SSH로 EC2에 접속해서 배포 (클러스터 명령어 대신 이거!)
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            # 기존 컨테이너 중지 및 삭제
+            docker stop fastapi-app || true
+            docker rm fastapi-app || true
+            # 새 이미지 가져오기 및 실행
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/fastapi-app:latest
+            docker run -d --name fastapi-app -p 80:8000 ${{ secrets.DOCKERHUB_USERNAME }}/fastapi-app:latest
             kubectl apply -f deployment.yml
           else
             echo "❌ Error: deployment.yaml or deployment.yml not found!"
