@@ -16,15 +16,7 @@ jobs:
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
+          key: ${{ secrets.EC2_SSH_KEY }} # 이 부분이 빠졌거나 이름이 다를 수 있어!
+          port: 22
           script: |
-            # 기존 컨테이너 중지 및 삭제
-            docker stop fastapi-app || true
-            docker rm fastapi-app || true
-            # 깃허브에서 최신 코드 받아오기 (또는 이미지 빌드)
-            # 여기서는 간단하게 EC2 내에서 빌드하는 방식으로 예시를 들게
-            cd ~/my-project || git clone https://github.com/네계정/네레포.git ~/my-project
-            cd ~/my-project
-            git pull origin main
-            docker build -t fastapi-app .
-            docker run -d --name fastapi-app -p 80:80 fastapi-app
+
